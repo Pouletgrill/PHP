@@ -1,7 +1,27 @@
 <?php
-$nombreParticipent = 3;
+
+//Cookie & Session
+session_start();
+if ($_SESSION["Animal1"] === null ||
+    $_SESSION["Animal2"] === null ||
+    $_SESSION["Animal3"] === null)
+{
+    $_SESSION["Animal1"]=0;
+    $_SESSION["Animal2"]=0;
+    $_SESSION["Animal3"]=0;
+}
+if ($_SESSION["VoteUsager"] === null)
+{
+    $_SESSION["VoteUsager"]=0;
+}
+if ($_SESSION["VoteTotal"] === null)
+{
+    $_SESSION["VoteTotal"] = 0;
+}
+//Initialisation des variable
+$nombreParticipent = $_SESSION["VoteTotal"];
 $Item = array("Chien", "Chat", "Oiseau", );
-$ItemValue = array(1,2,0);
+$ItemValue = array($_SESSION["Animal1"],$_SESSION["Animal2"],$_SESSION["Animal3"]);
 $LenghtBar = 250;
 $RoundNumber = 0;
 ?>
@@ -73,13 +93,13 @@ $RoundNumber = 0;
         Couleur:
         <input type="radio" name="couleur"
             <?php if (isset($couleur) && $couleur=="rouge") echo "checked";?>
-               value="rouge" onchange="onChangeRadio">Rouge
+               value="rouge" >Rouge
         <input type="radio" name="couleur"
             <?php if (isset($couleur) && $couleur=="bleu") echo "checked";?>
-               value="bleu" onchange="onChangeRadio">Bleu
+               value="bleu" >Bleu
         <input type="radio" name="couleur"
-            <?php if (isset($couleur) && $couleur=="clown") echo "checked";?>
-               value="clown" onchange="onChangeRadio">Clown
+            <?php if (isset($couleur) && $couleur=="vert") echo "checked";?>
+               value="vert" >Vert
         <br/>
         <a href="vote.php">Voter</a>
     </body>
