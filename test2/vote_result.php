@@ -70,8 +70,23 @@ $RoundNumber = 0;
                 </td>
             </tr>
         </table>
-        <a href="vote.php">Voter</a>
+        Couleur:
+        <input type="radio" name="couleur"
+            <?php if (isset($couleur) && $couleur=="rouge") echo "checked";?>
+               value="rouge" onchange="onChangeRadio">Rouge
+        <input type="radio" name="couleur"
+            <?php if (isset($couleur) && $couleur=="bleu") echo "checked";?>
+               value="bleu" onchange="onChangeRadio">Bleu
+        <input type="radio" name="couleur"
+            <?php if (isset($couleur) && $couleur=="clown") echo "checked";?>
+               value="clown" onchange="onChangeRadio">Clown
         <br/>
-        <a href="couleur.php">Changer de couleur</a>
+        <a href="vote.php">Voter</a>
     </body>
 </html>
+
+<?php
+function onChangeRadio($sender) {
+echo ($sender);
+}
+?>

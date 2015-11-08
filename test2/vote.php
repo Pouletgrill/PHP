@@ -9,5 +9,6 @@
 <html>
 <body>
 <a href="vote_result.php">Retour</a>
+<?php //phpinfo(); ?>
 </body>
 </html>
