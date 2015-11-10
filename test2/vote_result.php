@@ -26,11 +26,33 @@ else//sinon, on l'initialise
     $ItemValue = array(0,0,0,0);
     fclose($Myfile);
 }
-//Cookie & Session
 session_start();
-if ($_SESSION["CouleurBar"] === null)
+//Couleur
+
+$couleurIndex = 1;
+$CouleurBar;
+if (!isset($_SESSION["couleurIndex"]))
 {
-    $_SESSION["CouleurBar"] = Array("#99FF66", "#33CCFF");
+    $_SESSION["couleurIndex"]=1;
+    $couleurIndex = 1;
+}
+else
+{
+    $couleurIndex = $_SESSION["couleurIndex"];
+}
+
+if (isset($_POST["paramCouleur"]))
+{
+    $_SESSION["couleurIndex"] = $_POST["paramCouleur"];
+    $couleurIndex = $_POST["paramCouleur"];
+}
+
+if ($couleurIndex == 1) {
+    $CouleurBar = Array("#FF3300", "#FF9980");//rouge
+} else if ($couleurIndex == 2) {
+    $CouleurBar = Array("#0000FF", "#0066FF");//bleu
+} else if ($couleurIndex == 3) {
+    $CouleurBar = Array("#006600", "#00BB00");//vert
 }
 ?>
 
@@ -43,7 +65,7 @@ if ($_SESSION["CouleurBar"] === null)
                 <td><?php echo($Item[0]); ?></td>
                 <td><?php echo($ItemValue[0]); ?></td>
                 <td>
-                    <div style="background-color: <?php echo($_SESSION["CouleurBar"][0]) ?>; width: <?php
+                    <div style="background-color: <?php echo($CouleurBar[0]) ?>; width: <?php
                     if ($nombreParticipant>0)
                         echo($LenghtBar*($ItemValue[0]/$nombreParticipant));
                     else
@@ -62,7 +84,7 @@ if ($_SESSION["CouleurBar"] === null)
                 <td><?php echo($Item[1]); ?></td>
                 <td><?php echo($ItemValue[1]); ?></td>
                 <td>
-                    <div style="background-color: <?php echo($_SESSION["CouleurBar"][1]) ?>; width: <?php
+                    <div style="background-color: <?php echo($CouleurBar[1]) ?>; width: <?php
                     if ($nombreParticipant>0)
                         echo($LenghtBar*($ItemValue[1]/$nombreParticipant));
                     else
@@ -81,7 +103,7 @@ if ($_SESSION["CouleurBar"] === null)
                 <td><?php echo($Item[2]); ?></td>
                 <td><?php echo($ItemValue[2]); ?></td>
                 <td>
-                    <div style="background-color: <?php echo($_SESSION["CouleurBar"][0]) ?>; width: <?php
+                    <div style="background-color: <?php echo($CouleurBar[0]) ?>; width: <?php
                     if ($nombreParticipant>0)
                         echo($LenghtBar*($ItemValue[2]/$nombreParticipant));
                     else
@@ -100,7 +122,7 @@ if ($_SESSION["CouleurBar"] === null)
                 <td><?php echo($Item[3]); ?></td>
                 <td><?php echo($ItemValue[3]); ?></td>
                 <td>
-                    <div style="background-color: <?php echo($_SESSION["CouleurBar"][1]) ?>; width: <?php
+                    <div style="background-color: <?php echo($CouleurBar[1]) ?>; width: <?php
                     if ($nombreParticipant>0)
                         echo($LenghtBar*($ItemValue[3]/$nombreParticipant));
                     else
@@ -116,7 +138,7 @@ if ($_SESSION["CouleurBar"] === null)
                 </td>
             </tr>
         </table>
-        <a href="vote.php">Changer Couleurs</a>
+        <a href="vote_color.php">Changer Couleurs</a>
         <a href="vote.php"><h2>Votez</h2></a>
     </body>
 </html>

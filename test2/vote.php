@@ -7,7 +7,7 @@
  */
 $NBVoteMaxParPersonnes = 3;
 session_start();
-if ($_SESSION["VoteUsager"] === null)
+if (!(isset($_SESSION["VoteUsager"])))
 {
     $_SESSION["VoteUsager"]=0;
 }
