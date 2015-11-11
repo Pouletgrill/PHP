@@ -15,7 +15,6 @@ if (!(isset($_SESSION["VoteUsager"])))
 <html>
     <body>
         <h1>Votre animal prefere</h1>
-        <h2><?php echo( "Nombre de votes restent:" . ($NBVoteMaxParPersonnes- $_SESSION["VoteUsager"])); ?></h2>
         <form method="POST" >
             <input type="submit" name="button1"  value="Chien">
         </form>
@@ -138,6 +137,7 @@ if (!(isset($_SESSION["VoteUsager"])))
                 session_unset();
             }
         ?>
+        <h2><?php echo( "Nombre de votes restent:" . ($NBVoteMaxParPersonnes- $_SESSION["VoteUsager"])); ?></h2>
         <a href="vote_result.php"><h2>Retour</h2></a>
     </body>
 </html>
