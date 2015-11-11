@@ -5,7 +5,7 @@
  * Date: 2015-11-02
  * Time: 11:29
  */
-$NBVoteMaxParPersonnes = 3;
+$NBVoteMaxParPersonnes = 10;
 session_start();
 if (!(isset($_SESSION["VoteUsager"])))
 {
@@ -27,8 +27,12 @@ if (!(isset($_SESSION["VoteUsager"])))
         <form method="POST"'>
         <input type="submit" name="button4"  value="Tortue">
         </form>
+        </form>
+        <form method="POST"'>
+        <input type="submit" name="button5"  value="Gazelle">
+        </form>
         <form method="POST">
-            <input type="submit" name="RESET"  value="RESET SESSION">
+            <input type="submit" name="RESET"  value="RESET SESSION" hidden="hidden">
         </form>
         <?php
             if (isset($_POST['button1']))
@@ -39,20 +43,22 @@ if (!(isset($_SESSION["VoteUsager"])))
                     //Open, read
                     $Myfile1 = fopen("dataSheet","r");
                     $nombreParticipent = fgets($Myfile1);
-                    $ItemValue1 = fgets($Myfile1);
-                    $ItemValue2 = fgets($Myfile1);
-                    $ItemValue3 = fgets($Myfile1);
-                    $ItemValue4 = fgets($Myfile1);
+                    $ItemValue[1] = fgets($Myfile1);
+                    $ItemValue[2] = fgets($Myfile1);
+                    $ItemValue[3] = fgets($Myfile1);
+                    $ItemValue[4] = fgets($Myfile1);
+                    $ItemValue[5] = fgets($Myfile1);
 
                     fclose($Myfile1);
                     unlink("dataSheet");
                     //Open and overwrite
                     $Myfile2 = fopen("dataSheet","a");
                     fwrite($Myfile2,(string)($nombreParticipent+1)."\n");
-                    fwrite($Myfile2,(string)($ItemValue1+1)."\n");
-                    fwrite($Myfile2,(string) $ItemValue2);
-                    fwrite($Myfile2,(string) $ItemValue3);
-                    fwrite($Myfile2,(string) $ItemValue4);
+                    fwrite($Myfile2,(string)($ItemValue[1]+1)."\n");
+                    fwrite($Myfile2,(string) $ItemValue[2]);
+                    fwrite($Myfile2,(string) $ItemValue[3]);
+                    fwrite($Myfile2,(string) $ItemValue[4]);
+                    fwrite($Myfile2,(string) $ItemValue[5]);
                     fclose($Myfile2);
                 }
             }
@@ -64,20 +70,22 @@ if (!(isset($_SESSION["VoteUsager"])))
                     //Open, read
                     $Myfile1 = fopen("dataSheet","r");
                     $nombreParticipent = fgets($Myfile1);
-                    $ItemValue1 = fgets($Myfile1);
-                    $ItemValue2 = fgets($Myfile1);
-                    $ItemValue3 = fgets($Myfile1);
-                    $ItemValue4 = fgets($Myfile1);
+                    $ItemValue[1] = fgets($Myfile1);
+                    $ItemValue[2] = fgets($Myfile1);
+                    $ItemValue[3] = fgets($Myfile1);
+                    $ItemValue[4] = fgets($Myfile1);
+                    $ItemValue[5] = fgets($Myfile1);
 
                     fclose($Myfile1);
                     unlink("dataSheet");
                     //Open and overwrite
                     $Myfile2 = fopen("dataSheet","a");
                     fwrite($Myfile2,(string)($nombreParticipent+1)."\n");
-                    fwrite($Myfile2,(string) $ItemValue1);
-                    fwrite($Myfile2,(string)($ItemValue2+1)."\n");
-                    fwrite($Myfile2,(string) $ItemValue3);
-                    fwrite($Myfile2,(string) $ItemValue4);
+                    fwrite($Myfile2,(string) $ItemValue[1]);
+                    fwrite($Myfile2,(string)($ItemValue[2]+1)."\n");
+                    fwrite($Myfile2,(string) $ItemValue[3]);
+                    fwrite($Myfile2,(string) $ItemValue[4]);
+                    fwrite($Myfile2,(string) $ItemValue[5]);
                     fclose($Myfile2);
                 }
             }
@@ -89,20 +97,22 @@ if (!(isset($_SESSION["VoteUsager"])))
                     //Open, read
                     $Myfile1 = fopen("dataSheet","r");
                     $nombreParticipent = fgets($Myfile1);
-                    $ItemValue1 = fgets($Myfile1);
-                    $ItemValue2 = fgets($Myfile1);
-                    $ItemValue3 = fgets($Myfile1);
-                    $ItemValue4 = fgets($Myfile1);
+                    $ItemValue[1] = fgets($Myfile1);
+                    $ItemValue[2] = fgets($Myfile1);
+                    $ItemValue[3] = fgets($Myfile1);
+                    $ItemValue[4] = fgets($Myfile1);
+                    $ItemValue[5] = fgets($Myfile1);
 
                     fclose($Myfile1);
                     unlink("dataSheet");
                     //Open and overwrite
                     $Myfile2 = fopen("dataSheet","a");
                     fwrite($Myfile2,(string)($nombreParticipent+1)."\n");
-                    fwrite($Myfile2,(string) $ItemValue1);
-                    fwrite($Myfile2,(string) $ItemValue2);
-                    fwrite($Myfile2,(string)($ItemValue3+1)."\n");
-                    fwrite($Myfile2,(string) $ItemValue4);
+                    fwrite($Myfile2,(string) $ItemValue[1]);
+                    fwrite($Myfile2,(string) $ItemValue[2]);
+                    fwrite($Myfile2,(string)($ItemValue[3]+1)."\n");
+                    fwrite($Myfile2,(string) $ItemValue[4]);
+                    fwrite($Myfile2,(string) $ItemValue[5]);
                     fclose($Myfile2);
                 }
             }
@@ -114,20 +124,49 @@ if (!(isset($_SESSION["VoteUsager"])))
                     //Open, read
                     $Myfile1 = fopen("dataSheet","r");
                     $nombreParticipent = fgets($Myfile1);
-                    $ItemValue1 = fgets($Myfile1);
-                    $ItemValue2 = fgets($Myfile1);
-                    $ItemValue3 = fgets($Myfile1);
-                    $ItemValue4 = fgets($Myfile1);
+                    $ItemValue[1] = fgets($Myfile1);
+                    $ItemValue[2] = fgets($Myfile1);
+                    $ItemValue[3] = fgets($Myfile1);
+                    $ItemValue[4] = fgets($Myfile1);
+                    $ItemValue[5] = fgets($Myfile1);
 
                     fclose($Myfile1);
                     unlink("dataSheet");
                     //Open and overwrite
                     $Myfile2 = fopen("dataSheet","a");
                     fwrite($Myfile2,(string)($nombreParticipent+1)."\n");
-                    fwrite($Myfile2,(string) $ItemValue1);
-                    fwrite($Myfile2,(string) $ItemValue2);
-                    fwrite($Myfile2,(string) $ItemValue3);
-                    fwrite($Myfile2,(string)($ItemValue4+1)."\n");
+                    fwrite($Myfile2,(string) $ItemValue[1]);
+                    fwrite($Myfile2,(string) $ItemValue[2]);
+                    fwrite($Myfile2,(string) $ItemValue[3]);
+                    fwrite($Myfile2,(string)($ItemValue[4]+1)."\n");
+                    fwrite($Myfile2,(string) $ItemValue[5]);
+                    fclose($Myfile2);
+                }
+            }
+            else if (isset($_POST['button5']))
+            {
+                if($_SESSION["VoteUsager"]<$NBVoteMaxParPersonnes)
+                {
+                    $_SESSION["VoteUsager"] += 1;
+                    //Open, read
+                    $Myfile1 = fopen("dataSheet","r");
+                    $nombreParticipent = fgets($Myfile1);
+                    $ItemValue[1] = fgets($Myfile1);
+                    $ItemValue[2] = fgets($Myfile1);
+                    $ItemValue[3] = fgets($Myfile1);
+                    $ItemValue[4] = fgets($Myfile1);
+                    $ItemValue[5] = fgets($Myfile1);
+
+                    fclose($Myfile1);
+                    unlink("dataSheet");
+                    //Open and overwrite
+                    $Myfile2 = fopen("dataSheet","a");
+                    fwrite($Myfile2,(string)($nombreParticipent+1)."\n");
+                    fwrite($Myfile2,(string) $ItemValue[1]);
+                    fwrite($Myfile2,(string) $ItemValue[2]);
+                    fwrite($Myfile2,(string) $ItemValue[3]);
+                    fwrite($Myfile2,(string) $ItemValue[4]);
+                    fwrite($Myfile2,(string)($ItemValue[5]+1)."\n");
                     fclose($Myfile2);
                 }
             }

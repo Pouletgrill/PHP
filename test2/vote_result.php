@@ -1,13 +1,13 @@
 <?php
 //Initialisation des variable
 $nombreParticipant;
-$Item = array("Chien", "Dragon d'eau", "Tigre", "Tortue");
+$Item = array("Chien", "Dragon d'eau", "Tigre", "Tortue","Gazelle");
 $ItemValue;
-$LenghtBar = 250;
+$LenghtBar = 500;
 $RoundNumber = 0;
 
 //Lecture Fichier
-if (file_exists("dataSheet")) //si le txt existe, on va chercher les valeur a l'intérieur pour les utiliser
+if (file_exists("dataSheet")) //si le txt existe, on va chercher les valeur a l'intï¿½rieur pour les utiliser
 {
     $Myfile = fopen("dataSheet","r");
 
@@ -16,14 +16,17 @@ if (file_exists("dataSheet")) //si le txt existe, on va chercher les valeur a l'
     $ItemValue[1] = fgets($Myfile);
     $ItemValue[2] = fgets($Myfile);
     $ItemValue[3] = fgets($Myfile);
+    $ItemValue[4] = fgets($Myfile);
+    $ItemValue[5] = fgets($Myfile);
+
     fclose($Myfile);
 }
 else//sinon, on l'initialise
 {
     $Myfile = fopen("dataSheet","w");
-    fwrite($Myfile,"0\n0\n0\n0\n0\n");
+    fwrite($Myfile,"0\n0\n0\n0\n0\n0\n");
     $nombreParticipant = 0;
-    $ItemValue = array(0,0,0,0);
+    $ItemValue = array(0,0,0,0,0,0);
     fclose($Myfile);
 }
 session_start();
@@ -72,7 +75,7 @@ if ($couleurIndex == 1) {
                         echo(0);
                     ?>px">
                         <?php
-                        if($nombreParticipant>0)//Pour évité les divisions par zéros
+                        if($nombreParticipant>0)//Pour ï¿½vitï¿½ les divisions par zï¿½ros
                             echo(round(100*$ItemValue[0]/$nombreParticipant,$RoundNumber));
                         else
                             echo(0);
@@ -91,7 +94,7 @@ if ($couleurIndex == 1) {
                         echo(0);
                     ?>px">
                         <?php
-                        if($nombreParticipant>0)//Pour évité les divisions par zéros
+                        if($nombreParticipant>0)//Pour ï¿½vitï¿½ les divisions par zï¿½ros
                             echo(round(100*$ItemValue[1]/$nombreParticipant,$RoundNumber));
                         else
                             echo(0);
@@ -110,7 +113,7 @@ if ($couleurIndex == 1) {
                         echo(0);
                     ?>px">
                         <?php
-                        if($nombreParticipant>0)//Pour évité les divisions par zéros
+                        if($nombreParticipant>0)//Pour ï¿½vitï¿½ les divisions par zï¿½ros
                             echo(round(100*$ItemValue[2]/$nombreParticipant,$RoundNumber));
                         else
                             echo(0);
@@ -129,7 +132,7 @@ if ($couleurIndex == 1) {
                         echo(0);
                     ?>px">
                         <?php
-                        if($nombreParticipant>0)//Pour évité les divisions par zéros
+                        if($nombreParticipant>0)//Pour ï¿½vitï¿½ les divisions par zï¿½ros
                             echo(round(100*$ItemValue[3]/$nombreParticipant,$RoundNumber));
                         else
                             echo(0);
@@ -137,8 +140,27 @@ if ($couleurIndex == 1) {
                     </div>
                 </td>
             </tr>
+            <tr>
+                <td><?php echo($Item[4]); ?></td>
+                <td><?php echo($ItemValue[4]); ?></td>
+                <td>
+                    <div style="background-color: <?php echo($CouleurBar[0]) ?>; width: <?php
+                    if ($nombreParticipant>0)
+                        echo($LenghtBar*($ItemValue[4]/$nombreParticipant));
+                    else
+                        echo(0);
+                    ?>px">
+                        <?php
+                        if($nombreParticipant>0)//Pour ï¿½vitï¿½ les divisions par zï¿½ros
+                            echo(round(100*$ItemValue[4]/$nombreParticipant,$RoundNumber));
+                        else
+                            echo(0);
+                        ?>%
+                    </div>
+                </td>
+            </tr>
         </table>
-        <a href="vote_color.php">Changer Couleurs</a>
-        <a href="vote.php"><h2>Votez</h2></a>
+        <a href="vote_color.php">Changer Couleurs</a><br/>
+        <a href="vote.php" style="font-size: 25pt">Votez</a>
     </body>
 </html>
