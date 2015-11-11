@@ -1,8 +1,8 @@
 <?php
 //Initialisation des variable
-$nombreParticipant;
+$nombreParticipant = 0;
 $Item = array("Chien", "Dragon d'eau", "Tigre", "Tortue","Gazelle");
-$ItemValue;
+$ItemValue = array(0,0,0,0,0);;
 $LenghtBar = 500;
 $RoundNumber = 0;
 
@@ -11,22 +11,23 @@ if (file_exists("dataSheet")) //si le txt existe, on va chercher les valeur a l'
 {
     $Myfile = fopen("dataSheet","r");
 
-    $nombreParticipant = fgets($Myfile);
+
     $ItemValue[0] = fgets($Myfile);
     $ItemValue[1] = fgets($Myfile);
     $ItemValue[2] = fgets($Myfile);
     $ItemValue[3] = fgets($Myfile);
     $ItemValue[4] = fgets($Myfile);
-    $ItemValue[5] = fgets($Myfile);
-
     fclose($Myfile);
+    for ($i=0;i<5;$i++)
+    {
+        $nombreParticipant += (integer)$ItemValue[$i];
+    }
+
 }
 else//sinon, on l'initialise
 {
     $Myfile = fopen("dataSheet","w");
-    fwrite($Myfile,"0\n0\n0\n0\n0\n0\n");
-    $nombreParticipant = 0;
-    $ItemValue = array(0,0,0,0,0,0);
+    fwrite($Myfile,"0\n0\n0\n0\n0\n");
     fclose($Myfile);
 }
 session_start();
