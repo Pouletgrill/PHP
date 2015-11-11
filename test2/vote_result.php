@@ -18,11 +18,11 @@ if (file_exists("dataSheet")) //si le txt existe, on va chercher les valeur a l'
     $ItemValue[3] = fgets($Myfile);
     $ItemValue[4] = fgets($Myfile);
     fclose($Myfile);
-    for ($i=0;i<5;$i++)
-    {
-        $nombreParticipant += (integer)$ItemValue[$i];
-    }
-
+    $nombreParticipant = ($ItemValue[0]+
+        $ItemValue[1]+
+        $ItemValue[2]+
+        $ItemValue[3]+
+        $ItemValue[4]);
 }
 else//sinon, on l'initialise
 {
