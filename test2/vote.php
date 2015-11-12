@@ -11,6 +11,12 @@ if (!(isset($_SESSION["VoteUsager"])))
 {
     $_SESSION["VoteUsager"]=0;
 }
+if (!file_exists("dataSheet"))
+{
+    $Myfile = fopen("dataSheet","w");
+    fwrite($Myfile,"0\n0\n0\n0\n0\n");
+    fclose($Myfile);
+}
 ?>
 <html>
     <body>

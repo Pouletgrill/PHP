@@ -54,9 +54,9 @@ if (isset($_POST["paramCouleur"]))
 if ($couleurIndex == 1) {
     $CouleurBar = Array("#FF3300", "#FF9980");//rouge
 } else if ($couleurIndex == 2) {
-    $CouleurBar = Array("#0000FF", "#0066FF");//bleu
+    $CouleurBar = Array("#0099ff", "#0066FF");//bleu
 } else if ($couleurIndex == 3) {
-    $CouleurBar = Array("#006600", "#00BB00");//vert
+    $CouleurBar = Array("#12700f", "#00BB00");//vert
 }
 ?>
 
