@@ -1,38 +1,50 @@
 <?php
 //Initialisation des variable
+$TitreSondage = "Votre Animal Préférer";
+$NBVoteMaxParPersonnes = 20;
+
 $nombreParticipant = 0;
-$Item = array("Chien", "Dragon d'eau", "Tigre", "Tortue","Gazelle");
-$ItemValue = array(0,0,0,0,0);;
+$Item = array("Chien", "Dragon deau", "Tigre", "Tortue","Gazelle", "Sanglier", "Lion",
+			  "Cigogne", "Palourde", "Poulpe");
+$NbItem = count($Item);
+$ItemValue = array_fill(0,$NbItem,0);/*array(0,0,0,0,0);*/
 $LenghtBar = 500;
 $RoundNumber = 0;
+
+//défini le nombre d'élément dans la session
+session_start();
+if (!(isset($_SESSION["Item"])))
+{
+    $_SESSION["Item"] = $Item;
+}
+if (!(isset($_SESSION["VoteMaxPersonne"])))
+{
+    $_SESSION["VoteMaxPersonne"] = $NBVoteMaxParPersonnes;
+}
 
 //Lecture Fichier
 if (file_exists("dataSheet")) //si le txt existe, on va chercher les valeur a l'int�rieur pour les utiliser
 {
     $Myfile = fopen("dataSheet","r");
-
-
-    $ItemValue[0] = fgets($Myfile);
-    $ItemValue[1] = fgets($Myfile);
-    $ItemValue[2] = fgets($Myfile);
-    $ItemValue[3] = fgets($Myfile);
-    $ItemValue[4] = fgets($Myfile);
-    fclose($Myfile);
-    $nombreParticipant = ($ItemValue[0]+
-        $ItemValue[1]+
-        $ItemValue[2]+
-        $ItemValue[3]+
-        $ItemValue[4]);
+	//va chercher les valeurs du fichier
+    for($i=0; $i<$NbItem; $i++)
+	{
+		$ItemValue[$i] = fgets($Myfile);
+		$nombreParticipant += $ItemValue[$i];//pour savoir le NB total de votes
+	}
+	fclose($Myfile);
 }
 else//sinon, on l'initialise
 {
-    $Myfile = fopen("dataSheet","w");
-    fwrite($Myfile,"0\n0\n0\n0\n0\n");
-    fclose($Myfile);
+	$Myfile = fopen("dataSheet","w");
+    for($i=0; $i<$NbItem; $i++)
+	{
+		fwrite($Myfile,"0\n");
+	}
+	fclose($Myfile);
 }
-session_start();
-//Couleur
 
+//Couleur
 $couleurIndex = 1;
 $CouleurBar;
 if (!isset($_SESSION["couleurIndex"]))
@@ -62,104 +74,37 @@ if ($couleurIndex == 1) {
 
 <html>
     <body>
-        <h1>Votre animal prefere</h1>
+        <?php echo("<h1>" . $TitreSondage . "</h1>"); ?>
         <h2>Resultats obtenus pour <?php echo $nombreParticipant; ?> Participant(s)</h2>
         <table border="10" >
-            <tr>
-                <td><?php echo($Item[0]); ?></td>
-                <td><?php echo($ItemValue[0]); ?></td>
+            
+		  <?php
+		for ($i=0; $i<$NbItem; $i++)
+		{
+		echo("
+			<tr>
+                <td>" . $Item[$i] . "</td>
+                <td>" . $ItemValue[$i] . "</td>
                 <td>
-                    <div style="background-color: <?php echo($CouleurBar[0]) ?>; width: <?php
+                    <div style='background-color: ". $CouleurBar[$i%2] . "; width: ");
                     if ($nombreParticipant>0)
-                        echo($LenghtBar*($ItemValue[0]/$nombreParticipant));
+                        echo($LenghtBar*($ItemValue[$i]/$nombreParticipant));
                     else
                         echo(0);
-                    ?>px">
-                        <?php
+                    echo("px'>");
+                        
                         if($nombreParticipant>0)//Pour �vit� les divisions par z�ros
-                            echo(round(100*$ItemValue[0]/$nombreParticipant,$RoundNumber));
+                            echo(round(100*$ItemValue[$i]/$nombreParticipant,$RoundNumber));
                         else
                             echo(0);
-                        ?>%
+                        echo("
                     </div>
                 </td>
             </tr>
-            <tr>
-                <td><?php echo($Item[1]); ?></td>
-                <td><?php echo($ItemValue[1]); ?></td>
-                <td>
-                    <div style="background-color: <?php echo($CouleurBar[1]) ?>; width: <?php
-                    if ($nombreParticipant>0)
-                        echo($LenghtBar*($ItemValue[1]/$nombreParticipant));
-                    else
-                        echo(0);
-                    ?>px">
-                        <?php
-                        if($nombreParticipant>0)//Pour �vit� les divisions par z�ros
-                            echo(round(100*$ItemValue[1]/$nombreParticipant,$RoundNumber));
-                        else
-                            echo(0);
-                        ?>%
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td><?php echo($Item[2]); ?></td>
-                <td><?php echo($ItemValue[2]); ?></td>
-                <td>
-                    <div style="background-color: <?php echo($CouleurBar[0]) ?>; width: <?php
-                    if ($nombreParticipant>0)
-                        echo($LenghtBar*($ItemValue[2]/$nombreParticipant));
-                    else
-                        echo(0);
-                    ?>px">
-                        <?php
-                        if($nombreParticipant>0)//Pour �vit� les divisions par z�ros
-                            echo(round(100*$ItemValue[2]/$nombreParticipant,$RoundNumber));
-                        else
-                            echo(0);
-                        ?>%
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td><?php echo($Item[3]); ?></td>
-                <td><?php echo($ItemValue[3]); ?></td>
-                <td>
-                    <div style="background-color: <?php echo($CouleurBar[1]) ?>; width: <?php
-                    if ($nombreParticipant>0)
-                        echo($LenghtBar*($ItemValue[3]/$nombreParticipant));
-                    else
-                        echo(0);
-                    ?>px">
-                        <?php
-                        if($nombreParticipant>0)//Pour �vit� les divisions par z�ros
-                            echo(round(100*$ItemValue[3]/$nombreParticipant,$RoundNumber));
-                        else
-                            echo(0);
-                        ?>%
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td><?php echo($Item[4]); ?></td>
-                <td><?php echo($ItemValue[4]); ?></td>
-                <td>
-                    <div style="background-color: <?php echo($CouleurBar[0]) ?>; width: <?php
-                    if ($nombreParticipant>0)
-                        echo($LenghtBar*($ItemValue[4]/$nombreParticipant));
-                    else
-                        echo(0);
-                    ?>px">
-                        <?php
-                        if($nombreParticipant>0)//Pour �vit� les divisions par z�ros
-                            echo(round(100*$ItemValue[4]/$nombreParticipant,$RoundNumber));
-                        else
-                            echo(0);
-                        ?>%
-                    </div>
-                </td>
-            </tr>
+			"); 
+		}	
+?>	
+			
         </table>
         <a href="vote_color.php">Changer Couleurs</a><br/>
         <a href="vote.php" style="font-size: 25pt">Votez</a>
